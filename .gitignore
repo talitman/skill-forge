@@ -1,0 +1,5 @@
+node_modules/
+dist/
+*.tsbuildinfo
+skill-forge-manifest.json
+skill-forge-feedback.json

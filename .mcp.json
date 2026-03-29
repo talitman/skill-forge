@@ -1,0 +1,9 @@
+{
+  "skill-forge": {
+    "command": "bun",
+    "args": ["run", "${CLAUDE_PLUGIN_ROOT}/mcp-server/server.ts"],
+    "env": {
+      "FORGE_PORT": "4077"
+    }
+  }
+}

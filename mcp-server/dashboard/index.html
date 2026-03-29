@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skill Forge — Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Skill Forge</h1>
+    <div id="connection-status" class="status-badge disconnected">Disconnected</div>
+  </header>
+
+  <main>
+    <section id="pipeline-overview">
+      <h2>Pipeline</h2>
+      <div id="pipeline-status" class="status-idle">Idle</div>
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+        <span id="progress-text">0 / 0 skills</span>
+      </div>
+      <div id="phase-info"></div>
+    </section>
+
+    <section id="cost-summary-section" class="hidden">
+      <h2>Cost Optimization</h2>
+      <div id="cost-summary" class="cost-panel"></div>
+    </section>
+
+    <section id="skill-cards-section">
+      <h2>Skills</h2>
+      <div id="skill-cards" class="card-grid"></div>
+    </section>
+
+    <section id="log-section">
+      <h2>Live Log</h2>
+      <div id="live-log" class="log-container"></div>
+    </section>
+
+    <section id="errors-section" class="hidden">
+      <h2>Errors</h2>
+      <div id="error-list"></div>
+    </section>
+
+    <section id="health-section" class="hidden">
+      <h2>Skill Health</h2>
+      <div id="health-summary" class="health-panel"></div>
+      <div id="health-skills" class="health-skills-list"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

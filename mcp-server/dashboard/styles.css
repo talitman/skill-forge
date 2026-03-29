@@ -1,0 +1,363 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace;
+  background: #0d1117;
+  color: #c9d1d9;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #21262d;
+}
+
+header h1 { font-size: 24px; color: #58a6ff; }
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.connected { background: #1b4332; color: #40c057; }
+.disconnected { background: #3d1f1f; color: #f87171; }
+
+h2 {
+  font-size: 16px;
+  color: #8b949e;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+section { margin-bottom: 32px; }
+
+.status-idle { color: #8b949e; }
+.status-analyzing { color: #d29922; }
+.status-generating { color: #58a6ff; }
+.status-paused { color: #f0883e; }
+.status-complete { color: #3fb950; }
+.status-error { color: #f85149; }
+
+#pipeline-status { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+
+#progress-bar-container {
+  background: #21262d;
+  border-radius: 6px;
+  height: 24px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+#progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #238636, #3fb950);
+  border-radius: 6px;
+  transition: width 0.5s ease;
+  width: 0%;
+}
+
+#progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+#phase-info { font-size: 14px; color: #8b949e; }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+}
+
+.skill-card {
+  background: #161b22;
+  border: 1px solid #21262d;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.skill-name { font-weight: 700; color: #f0f6fc; }
+
+.skill-scope {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.scope-global { background: #1f3a5f; color: #58a6ff; }
+.scope-project { background: #2d1f3a; color: #bc8cff; }
+
+.skill-status {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+.status-planned { background: #21262d; color: #8b949e; }
+.status-generating { background: #1f3a5f; color: #58a6ff; }
+.status-reviewing { background: #3d2e00; color: #d29922; }
+.status-complete { background: #1b4332; color: #3fb950; }
+.status-skipped { background: #21262d; color: #484f58; }
+.status-failed { background: #3d1f1f; color: #f85149; }
+
+.skill-desc { font-size: 13px; color: #8b949e; margin-bottom: 8px; }
+.skill-deps { font-size: 12px; color: #484f58; margin-bottom: 8px; }
+
+.skill-actions { display: flex; gap: 8px; }
+.skill-actions button {
+  background: #21262d;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+  padding: 4px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.skill-actions button:hover { background: #30363d; }
+
+.log-container {
+  background: #0d1117;
+  border: 1px solid #21262d;
+  border-radius: 8px;
+  padding: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+  font-family: "SF Mono", "Fira Code", monospace;
+  font-size: 12px;
+}
+
+.log-entry { padding: 2px 0; border-bottom: 1px solid #161b22; }
+.log-time { color: #484f58; }
+.log-type { font-weight: 600; }
+.log-state_update .log-type { color: #58a6ff; }
+.log-generation_start .log-type { color: #d29922; }
+.log-generation_complete .log-type { color: #3fb950; }
+.log-error .log-type { color: #f85149; }
+.log-override_applied .log-type { color: #bc8cff; }
+
+.hidden { display: none; }
+.error-entry {
+  background: #3d1f1f;
+  border: 1px solid #f85149;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  color: #f85149;
+  font-size: 13px;
+}
+
+/* Cost optimization panel */
+.cost-panel {
+  background: #161b22;
+  border: 1px solid #21262d;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.cost-headline {
+  font-size: 18px;
+  font-weight: 700;
+  color: #3fb950;
+  margin-bottom: 4px;
+}
+
+.cost-savings {
+  font-size: 14px;
+  color: #8b949e;
+  margin-bottom: 12px;
+}
+
+.cost-tier-row, .cost-model-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.cost-tier-badge {
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.tier-template { background: #1b4332; color: #3fb950; }
+.tier-light { background: #1f3a5f; color: #58a6ff; }
+.tier-full { background: #3d2e00; color: #d29922; }
+
+.cost-model-badge {
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.model-haiku { background: #1b4332; color: #40c057; }
+.model-sonnet { background: #1f3a5f; color: #58a6ff; }
+.model-opus { background: #2d1f3a; color: #bc8cff; }
+
+/* Skill card cost info */
+.skill-cost-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.cost-tokens {
+  font-size: 11px;
+  color: #8b949e;
+}
+
+.cost-reason {
+  font-size: 11px;
+  color: #6e7681;
+  font-style: italic;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+/* Health section */
+.health-panel {
+  background: #161b22;
+  border: 1px solid #21262d;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.health-summary-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.health-badge {
+  padding: 4px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.health-total { background: #21262d; color: #c9d1d9; }
+.health-healthy { background: #1b4332; color: #3fb950; }
+.health-warning { background: #3d2e00; color: #d29922; }
+.health-critical { background: #3d1f1f; color: #f85149; }
+
+.health-skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.health-skill-row {
+  background: #161b22;
+  border: 1px solid #21262d;
+  border-radius: 6px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.health-skill-name {
+  font-weight: 600;
+  color: #f0f6fc;
+  min-width: 180px;
+}
+
+.health-bar-container {
+  flex: 1;
+  min-width: 120px;
+  height: 8px;
+  background: #21262d;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.health-bar {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.health-bar-good { background: #3fb950; }
+.health-bar-warn { background: #d29922; }
+.health-bar-bad { background: #f85149; }
+
+.health-score-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #c9d1d9;
+  min-width: 55px;
+}
+
+.health-uses-text {
+  font-size: 12px;
+  color: #8b949e;
+  min-width: 55px;
+}
+
+.health-review-flag {
+  font-size: 10px;
+  font-weight: 700;
+  color: #f85149;
+  background: #3d1f1f;
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+
+.health-last-change {
+  width: 100%;
+  font-size: 11px;
+  color: #6e7681;
+  font-style: italic;
+  margin-top: 4px;
+}
+
+/* Skill card health bar */
+.skill-health-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.skill-health-bar-container {
+  flex: 1;
+  height: 6px;
+  background: #21262d;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.skill-health-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.skill-health-score {
+  font-size: 11px;
+  font-weight: 600;
+  color: #8b949e;
+}

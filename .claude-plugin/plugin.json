@@ -1,0 +1,8 @@
+{
+  "name": "skill-forge",
+  "description": "Autonomously generates Claude Code skills from PRDs, tech specs, and codebases. Analyzes requirements, classifies scope (project vs global), resolves dependencies, and drives skill-creator to produce tested skills — with a real-time browser dashboard for monitoring and intervention.",
+  "version": "0.1.0",
+  "author": {
+    "name": "AI Factory"
+  }
+}
