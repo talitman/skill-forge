@@ -109,6 +109,18 @@ The dashboard shows the tier, model, token estimate, dollar cost, and *reason* f
 - **6 MCP Tools** — analyze, generate, status, control, manifest, feedback
 - **Shared Logic** — document parser, codebase scanner, scope classifier, dependency resolver, template registry, cost classifier, signal collector, skill searcher
 
+## Why Bun?
+
+Skill Forge uses [Bun](https://bun.sh) as its runtime. Here's why:
+
+- **Native HTTP + WebSocket in one call** — `Bun.serve()` handles both HTTP requests and WebSocket upgrades without extra dependencies. No need for Express + ws + separate setup.
+- **Runs TypeScript directly** — No build step, no transpilation. Write `.ts`, run `.ts`.
+- **Fast test runner** — 63 tests in ~40ms. Built-in `bun:test` with Jest-compatible API.
+- **Claude Code ecosystem alignment** — Existing Claude Code plugins (Fakechat, Discord, Telegram MCP servers) all use Bun. Skill Forge follows the established pattern.
+- **Single binary** — One install, no Node.js version management needed.
+
+The shared logic modules (`shared/`) are pure TypeScript with no Bun-specific APIs — only the MCP server entry point (`mcp-server/server.ts`) and the signal hook use Bun APIs.
+
 ## Development
 
 ```bash
